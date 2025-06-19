@@ -3,6 +3,8 @@ services:
     image: postgres:16
     restart: unless-stopped
     container_name: balkanetflix-db
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -30,6 +32,8 @@ services:
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=production
     env_file:
       - ./.env
     depends_on:
