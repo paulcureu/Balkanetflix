@@ -16,6 +16,8 @@ COPY . .
 
 RUN npx prisma generate
 
+RUN npm run build
+
 #production
 
 FROM node:20-bookworm
