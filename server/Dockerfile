@@ -40,4 +40,4 @@ EXPOSE 3000
 USER node
 
 
-CMD [ "node", "dist/server.js" ]
+CMD [ "npm", "run", "dev" ]
