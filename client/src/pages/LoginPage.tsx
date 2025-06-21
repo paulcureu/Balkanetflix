@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate, Link } from "react-router-dom";
-
+import apiClient from "../api/axios";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,13 +13,10 @@ const LoginPage = () => {
     e.preventDefault();
     setError("");
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await apiClient.post("/api/auth/login", {
+        email,
+        password,
+      });
       const { accessToken, user } = response.data;
       login(accessToken, user);
       navigate("/");
