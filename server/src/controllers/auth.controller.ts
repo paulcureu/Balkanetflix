@@ -65,7 +65,15 @@ export const loginUserHandler = async (req: Request, res: Response) => {
       { expiresIn: "1d" }
     );
 
-    res.status(200).json({ accessToken: token });
+    res.status(200).json({
+      accessToken: token,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Something went wrong on the server" });

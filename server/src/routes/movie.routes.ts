@@ -1,4 +1,3 @@
-// server/src/api/movie.routes.ts
 import { Router } from "express";
 import { validate } from "../middleware/validate";
 import { createMovieSchema, updateMovieSchema } from "../schemas/movie.schema";
