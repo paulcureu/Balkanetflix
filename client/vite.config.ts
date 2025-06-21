@@ -1,17 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
+import tailwind from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwind()],
   server: {
-    host: true, // necesar pentru a expune în rețeaua docker
+    host: true,
     port: 3000,
     proxy: {
       "/api": {
         target: "http://server:3000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""), // scoate /api din URL-ul final
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
