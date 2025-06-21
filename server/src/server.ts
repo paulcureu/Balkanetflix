@@ -10,7 +10,12 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CLIENT_ORIGIN,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/api/status", (req, res) => {
