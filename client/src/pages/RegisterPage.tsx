@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import apiClient from "../api/axios";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -17,15 +18,13 @@ const RegisterPage = () => {
     setSuccessMessage("");
 
     try {
-      await axios.post("http://localhost:3001/api/auth/register", {
+      await apiClient.post("/api/auth/register", {
         email,
         password,
         name,
       });
 
-      setSuccessMessage(
-        "Înregistrare reușită! Vei fi redirecționat la pagina de login..."
-      );
+      setSuccessMessage("Register Completed!");
 
       setTimeout(() => {
         navigate("/login");
@@ -33,12 +32,12 @@ const RegisterPage = () => {
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         if (err.response.status === 409) {
-          setError("Un utilizator cu acest email există deja.");
+          setError("A user with this email already exists.");
         } else {
-          setError("Înregistrarea a eșuat. Te rugăm să încerci din nou.");
+          setError("Registration failed.");
         }
       } else {
-        setError("A apărut o eroare neașteptată.");
+        setError("An unexpected error occurred.");
       }
       console.error(err);
     }
@@ -47,10 +46,10 @@ const RegisterPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="p-8 bg-gray-800 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Creează un Cont</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block mb-2">Nume</label>
+            <label className="block mb-2">Name</label>
             <input
               type="text"
               placeholder="Numele tău"
@@ -71,7 +70,7 @@ const RegisterPage = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block mb-2">Parolă</label>
+            <label className="block mb-2">Password</label>
             <input
               type="password"
               placeholder="Parolă"
@@ -86,7 +85,7 @@ const RegisterPage = () => {
             type="submit"
             className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 rounded-md font-bold transition-colors"
           >
-            Înregistrează-te
+            Register
           </button>
           {successMessage && (
             <p className="mt-4 text-center text-green-400">{successMessage}</p>
@@ -94,9 +93,9 @@ const RegisterPage = () => {
           {error && <p className="mt-4 text-center text-red-400">{error}</p>}
         </form>
         <p className="mt-6 text-center text-sm">
-          Ai deja un cont?{" "}
+          Already have an account?{" "}
           <Link to="/login" className="text-yellow-500 hover:underline">
-            Autentifică-te
+            Log in
           </Link>
         </p>
       </div>

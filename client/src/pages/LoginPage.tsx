@@ -30,7 +30,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="p-8 bg-gray-800 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-yellow-500">
-          Autentificare
+          Log In
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -48,11 +48,11 @@ const LoginPage = () => {
           </div>
           <div className="mb-6">
             <label className="block mb-2 text-sm font-bold text-gray-300">
-              Parolă
+              Password
             </label>
             <input
               type="password"
-              placeholder="Parolă"
+              placeholder="Password"
               required
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
               value={password}
@@ -64,19 +64,19 @@ const LoginPage = () => {
             type="submit"
             className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-md font-bold transition-colors"
           >
-            Login
+            Log In
           </button>
 
           {error && <p className="mt-4 text-center text-red-400">{error}</p>}
         </form>
 
         <p className="mt-6 text-center text-sm text-gray-400">
-          Nu ai un cont?{" "}
+          Don't have an account?{" "}
           <Link
             to="/register"
             className="font-semibold text-yellow-500 hover:underline"
           >
-            Înregistrează-te aici
+            Register here
           </Link>
         </p>
       </div>

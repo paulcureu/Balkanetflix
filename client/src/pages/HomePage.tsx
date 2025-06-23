@@ -1,12 +1,11 @@
 // client/src/pages/HomePage.tsx
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 import { useMovieStore } from "../store/movieStore";
 import type { Movie } from "../types";
 import AddMovieForm from "../components/AddMovieForm";
 import EditMovieForm from "../components/EditMovieForm";
-
+import apiClient from "../api/axios";
 const HomePage = () => {
   const { user, token, logout } = useAuthStore();
   const { movies, setMovies, removeMovie } = useMovieStore();
@@ -15,7 +14,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/movies");
+        const response = await apiClient.get("/api/movies");
         setMovies(response.data);
       } catch (error) {
         console.error("Failed to fetch movies:", error);
@@ -29,7 +28,7 @@ const HomePage = () => {
     }
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.delete(`http://localhost:3001/api/movies/${movieId}`, config);
+      await apiClient.delete(`/api/movies/${movieId}`, config);
       removeMovie(movieId);
     } catch (error) {
       console.error("Failed to delete movie:", error);
@@ -44,7 +43,7 @@ const HomePage = () => {
           <h1 className="text-3xl font-bold text-yellow-500">Balkanetflix</h1>
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <span className="text-gray-300">
-              Bine ai venit, {user?.name}!{" "}
+              Welcome, {user?.name}!{" "}
               <span className="font-bold text-yellow-500">({user?.role})</span>
             </span>
             <button
@@ -59,7 +58,7 @@ const HomePage = () => {
         <main>
           {user?.role === "ADMIN" && <AddMovieForm />}
 
-          <h2 className="text-2xl font-bold mt-8">Lista de Filme</h2>
+          <h2 className="text-2xl font-bold mt-8">Movie List</h2>
           <ul className="mt-4 space-y-3">
             {movies.map((movie) => (
               <li

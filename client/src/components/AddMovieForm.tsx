@@ -37,7 +37,7 @@ const AddMovieForm = () => {
 
   return (
     <div className="my-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
-      <h3 className="text-xl font-bold mb-4">Adaugă un Film Nou</h3>
+      <h3 className="text-xl font-bold mb-4">Add a New Movie</h3>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <input
           type="text"
@@ -59,7 +59,7 @@ const AddMovieForm = () => {
           type="submit"
           className="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-md font-bold"
         >
-          Adaugă
+          Add
         </button>
       </form>
       {error && <p className="mt-2 text-red-400 text-sm">{error}</p>}
