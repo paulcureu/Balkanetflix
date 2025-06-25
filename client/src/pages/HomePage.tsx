@@ -1,4 +1,3 @@
-// client/src/pages/HomePage.tsx
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { useMovieStore } from "../store/movieStore";
@@ -23,7 +22,7 @@ const HomePage = () => {
     fetchMovies();
   }, [setMovies]);
   const handleDelete = async (movieId: number) => {
-    if (!window.confirm("Ești sigur că vrei să ștergi acest film?")) {
+    if (!window.confirm("Are you sure you want to delete this movie?")) {
       return;
     }
     try {
@@ -91,7 +90,7 @@ const HomePage = () => {
             ))}
             {movies.length === 0 && (
               <p className="text-gray-500 mt-4">
-                Nu există filme în baza de date. Adaugă unul!
+                There are no movies in the database. Add one!
               </p>
             )}
           </ul>

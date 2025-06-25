@@ -1,4 +1,3 @@
-// client/src/components/EditMovieForm.tsx
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/authStore";
